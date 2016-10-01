@@ -1,6 +1,6 @@
 class Player
   attr_reader :name
-  def initialize(name)
+  def initialize
     @name = "Player"
   end
 
@@ -14,6 +14,9 @@ class Player
   end
 
   def valid?(choices)
-    choices.split.count == 2 && choices.all? { |choice| (0..15).cover?(choice.to_i)}
+    choices = choices.split(",")
+    return false unless choices.count == 2
+    return false unless choices.all? { |choice| (0..15).cover?(choice.to_i)}
+    true
   end
 end

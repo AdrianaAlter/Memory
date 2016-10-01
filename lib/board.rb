@@ -1,4 +1,3 @@
-
 require_relative "card.rb"
 
 class Board
@@ -35,8 +34,14 @@ class Board
   end
 
   def hide_at(idx)
-    grid[idx].revealed = false
+    grid[idx].locked ? nil : grid[idx].revealed = false
     grid[idx].to_s
+  end
+
+  def lock(idx1, idx2)
+    [idx1, idx2].each do |idx|
+      grid[idx].locked = true
+    end
   end
 
 end

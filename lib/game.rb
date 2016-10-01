@@ -7,7 +7,7 @@ class Game
 
   def initialize
     @board = Board.new
-    @player = Player.new("Player")
+    @player = Player.new
   end
 
   def play
@@ -20,20 +20,21 @@ class Game
   end
 
   def play_round
-      display
-      choice = player.choose.split(",")
-      card1 = choice.first.to_i
-      card2 = choice.last.to_i
+    display
+    choice = player.choose.split(",")
+    card1 = choice.first.to_i
+    card2 = choice.last.to_i
+    if [board.grid[card1], board.grid[card2]].all? { |card| !card.locked }
       board.reveal_at(card1)
       board.reveal_at(card2)
-      display
-      unless match?(card1, card2)
-        sleep(2)
-        board.hide_at(card1)
-        board.hide_at(card2)
-      end
+    end
+    display
+    unless match?(card1, card2)
+      sleep(2)
+      board.hide_at(card1)
+      board.hide_at(card2)
+    end
   end
-
 
   def display
     system("clear")
@@ -41,7 +42,9 @@ class Game
   end
 
   def match?(card1, card2)
-    board.grid[card1].value == board.grid[card2].value
+    return false unless board.grid[card1].value == board.grid[card2].value
+    board.lock(card1, card2)
+    true
   end
 
   def declare_winner
