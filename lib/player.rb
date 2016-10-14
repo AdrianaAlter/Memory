@@ -13,10 +13,4 @@ class Player
     choices = gets.chomp
   end
 
-  def valid?(choices)
-    choices = choices.split(",")
-    return false unless choices.count == 2
-    return false unless choices.all? { |choice| (0..15).cover?(choice.to_i)}
-    true
-  end
 end

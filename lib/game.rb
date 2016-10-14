@@ -11,22 +11,23 @@ class Game
   end
 
   def play
-
     until board.won?
       play_round
     end
     declare_winner
-
   end
 
   def play_round
     display
-    choice = player.choose.split(",")
-    card1 = choice.first.to_i
-    card2 = choice.last.to_i
-    if [board.grid[card1], board.grid[card2]].all? { |card| !card.locked }
+    choices = player.choose.split(",")
+    card1 = choices.first.to_i
+    card2 = choices.last.to_i
+    if valid?(choices)
       board.reveal_at(card1)
       board.reveal_at(card2)
+    else
+      player.prompt
+      return
     end
     display
     unless match?(card1, card2)
@@ -34,6 +35,13 @@ class Game
       board.hide_at(card1)
       board.hide_at(card2)
     end
+  end
+
+  def valid?(choices)
+    return false if choices.count != 2
+    return false unless choices.all? { |choice| (0..15).cover?(choice.to_i)}
+    return false if [board.grid[choices.first.to_i], board.grid[choices.last.to_i]].any? { |card| card.locked? }
+    true
   end
 
   def display

@@ -13,4 +13,8 @@ class Card
     self.revealed ? "#{value}" : "🂠"
   end
 
+  def locked?
+    self.locked ? true : false
+  end
+
 end
