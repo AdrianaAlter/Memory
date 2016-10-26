@@ -19,14 +19,14 @@ describe Player do
       player.choose
     end
   end
-  describe "#valid?" do
-    it "checks that the player has picked two cards" do
-      expect(player.valid?("1")).to be false
-      expect(player.valid?("1, 2")).to be true
-    end
-    it "checks that the cards exist" do
-      expect(player.valid?("0, 100")).to be false
-      expect(player.valid?("0, 1")).to be true
-    end
-  end
+  # describe "#valid?" do
+  #   it "checks that the player has picked two cards" do
+  #     expect(player.valid?("1")).to be false
+  #     expect(player.valid?("1, 2")).to be true
+  #   end
+  #   it "checks that the cards exist" do
+  #     expect(player.valid?("0, 100")).to be false
+  #     expect(player.valid?("0, 1")).to be true
+  #   end
+  # end
 end

@@ -1,3 +1,4 @@
+require 'colorize'
 class Card
   attr_reader :value
   attr_accessor :revealed, :deck, :locked
@@ -10,7 +11,7 @@ class Card
   end
 
   def to_s
-    self.revealed ? "#{value}" : "🂠"
+    self.revealed ? "#{value}" : "🂠".colorize(:magenta)
   end
 
   def locked?

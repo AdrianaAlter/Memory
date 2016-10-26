@@ -18,7 +18,7 @@ class Board
   end
 
   def render
-    puts grid[0..3].each { |card| card.to_s }.join(" ")
+    puts grid[0..3].join(" ")
     puts grid[4..7].join(" ")
     puts grid[8..11].join(" ")
     puts grid[12..15].join(" ")
